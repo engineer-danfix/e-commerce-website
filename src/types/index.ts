@@ -33,6 +33,8 @@ export type MedicalCategory =
   | 'Sleep & Stress Relief'
   | 'Joints & Mobility'
   | 'Immunity & Vit C'
+  | 'Oral Healthcare'
+  | 'Targeted Protocols'
   | 'Combos & Value Packs';
 
 export interface CartItem {

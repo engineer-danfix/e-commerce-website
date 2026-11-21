@@ -40,6 +40,12 @@ export const PromoHero: React.FC = () => {
                 Triangle Life-Saver Package
               </button>
               <button
+                onClick={() => setSelectedCategory('Targeted Protocols')}
+                className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs rounded-xl transition-all"
+              >
+                Targeted Protocols
+              </button>
+              <button
                 onClick={() => setSelectedCategory('Stem Cell Therapy')}
                 className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition-all"
               >
@@ -49,7 +55,7 @@ export const PromoHero: React.FC = () => {
                 onClick={() => setSelectedCategory("Men's Vitality")}
                 className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs rounded-xl backdrop-blur-sm transition-all"
               >
-                AlphaMax M+
+                AlphaMax & AliPrime
               </button>
             </div>
           </div>

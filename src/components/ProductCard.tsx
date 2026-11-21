@@ -42,12 +42,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           loading="lazy"
         />
 
-        {/* Discount Badge */}
-        {product.discountPercent > 0 && (
+        {/* Discount / Promo Badge */}
+        {product.originalPrice > product.price ? (
+          <span className="absolute top-2.5 left-2.5 bg-gradient-to-r from-rose-600 to-amber-600 text-white text-[10px] font-black px-2 py-0.5 rounded-md shadow-sm">
+            PROMO • SAVE ₦{(product.originalPrice - product.price).toLocaleString()}
+          </span>
+        ) : product.discountPercent > 0 ? (
           <span className="absolute top-2.5 left-2.5 bg-jumia-orange text-white text-[11px] font-extrabold px-2 py-0.5 rounded-md shadow-sm">
             -{product.discountPercent}%
           </span>
-        )}
+        ) : null}
 
         {/* Prescription or Special Badge */}
         {product.prescriptionRequired ? (
@@ -103,8 +107,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               ₦{product.price.toLocaleString()}
             </div>
             {product.originalPrice > product.price && (
-              <div className="text-[11px] text-slate-400 line-through">
-                ₦{product.originalPrice.toLocaleString()}
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-[11px] text-slate-400 line-through font-medium">
+                  ₦{product.originalPrice.toLocaleString()}
+                </span>
+                <span className="text-[10px] font-extrabold text-rose-600 bg-rose-50 px-1 rounded border border-rose-200">
+                  -₦{(product.originalPrice - product.price).toLocaleString()}
+                </span>
               </div>
             )}
           </div>

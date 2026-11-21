@@ -11,7 +11,9 @@ import {
   Moon, 
   ShieldCheck, 
   PackageCheck,
-  Zap
+  Zap,
+  Smile,
+  HeartPulse
 } from 'lucide-react';
 
 const CATEGORY_ICONS: Record<MedicalCategory, React.ReactNode> = {
@@ -23,6 +25,8 @@ const CATEGORY_ICONS: Record<MedicalCategory, React.ReactNode> = {
   'Sleep & Stress Relief': <Moon className="w-4 h-4 text-purple-500" />,
   'Joints & Mobility': <Zap className="w-4 h-4 text-amber-500" />,
   'Immunity & Vit C': <ShieldCheck className="w-4 h-4 text-orange-500" />,
+  'Oral Healthcare': <Smile className="w-4 h-4 text-cyan-500" />,
+  'Targeted Protocols': <HeartPulse className="w-4 h-4 text-red-500" />,
   'Combos & Value Packs': <PackageCheck className="w-4 h-4 text-indigo-500" />,
 };
 

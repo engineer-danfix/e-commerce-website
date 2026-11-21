@@ -59,11 +59,15 @@ export const ProductDetailModal: React.FC = () => {
                 alt={selectedProduct.name}
                 className="w-full h-full object-contain p-2"
               />
-              {selectedProduct.discountPercent > 0 && (
+              {selectedProduct.originalPrice > selectedProduct.price ? (
+                <span className="absolute top-3 left-3 bg-gradient-to-r from-rose-600 to-amber-600 text-white text-xs font-black px-2.5 py-1 rounded-md shadow">
+                  PROMO • SAVE ₦{(selectedProduct.originalPrice - selectedProduct.price).toLocaleString()}
+                </span>
+              ) : selectedProduct.discountPercent > 0 ? (
                 <span className="absolute top-3 left-3 bg-amber-500 text-slate-950 text-xs font-black px-2.5 py-1 rounded-md shadow">
                   -{selectedProduct.discountPercent}% OFF
                 </span>
-              )}
+              ) : null}
             </div>
 
             {/* Quality & Trust badging */}
@@ -109,17 +113,25 @@ export const ProductDetailModal: React.FC = () => {
               </div>
 
               {/* Price */}
-              <div className="mb-4">
-                <div className="flex items-baseline gap-2">
+              <div className="mb-4 bg-emerald-50/70 p-3 rounded-2xl border border-emerald-200/60">
+                <div className="flex items-baseline gap-2.5 flex-wrap">
                   <span className="text-2xl sm:text-3xl font-black text-slate-900">
                     ₦{selectedProduct.price.toLocaleString()}
                   </span>
                   {selectedProduct.originalPrice > selectedProduct.price && (
-                    <span className="text-sm text-slate-400 line-through">
-                      ₦{selectedProduct.originalPrice.toLocaleString()}
-                    </span>
+                    <>
+                      <span className="text-sm sm:text-base text-slate-400 line-through font-medium">
+                        ₦{selectedProduct.originalPrice.toLocaleString()}
+                      </span>
+                      <span className="text-xs font-black text-rose-700 bg-rose-100 border border-rose-300 px-2 py-0.5 rounded-full">
+                        PROMO: Slashed ₦{(selectedProduct.originalPrice - selectedProduct.price).toLocaleString()} off!
+                      </span>
+                    </>
                   )}
                 </div>
+                <p className="text-[11px] text-emerald-800 font-semibold mt-1">
+                  ✓ Special Promo Price: Pay ₦{selectedProduct.price.toLocaleString()} instead of ₦{selectedProduct.originalPrice.toLocaleString()}!
+                </p>
                 <p className="text-[11px] text-slate-500 mt-0.5">
                   Direct Zenith Bank transfer with instant optical verification & WhatsApp dispatch
                 </p>
