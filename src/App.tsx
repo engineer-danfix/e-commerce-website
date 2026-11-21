@@ -8,6 +8,7 @@ import { ProductDetailModal } from './components/ProductDetailModal';
 import { CartDrawer } from './components/CartDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { OrdersModal } from './components/OrdersModal';
+import { RegistrationPackageModal } from './components/RegistrationPackageModal';
 import { Footer } from './components/Footer';
 import { SlidersHorizontal, ArrowUpDown, Sparkles, AlertCircle } from 'lucide-react';
 
@@ -198,6 +199,7 @@ export function AppContent() {
       <CartDrawer />
       <CheckoutModal />
       <OrdersModal />
+      <RegistrationPackageModal />
 
       {/* Global Footer */}
       <Footer />

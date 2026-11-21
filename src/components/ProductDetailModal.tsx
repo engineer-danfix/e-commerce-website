@@ -7,13 +7,22 @@ import {
   Plus, 
   Minus, 
   Truck, 
-  MessageCircle
+  MessageCircle,
+  Award
 } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
 import { generateProductInquiryMessage } from '../utils/whatsapp';
 
 export const ProductDetailModal: React.FC = () => {
-  const { selectedProduct, setSelectedProduct, addToCart, setIsCheckoutOpen, setIsCartOpen, vendorConfig } = useShop();
+  const { 
+    selectedProduct, 
+    setSelectedProduct, 
+    addToCart, 
+    setIsCheckoutOpen, 
+    setIsCartOpen, 
+    vendorConfig,
+    setRequestingPackage 
+  } = useShop();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'overview' | 'dosage' | 'details'>('overview');
 
@@ -201,54 +210,83 @@ export const ProductDetailModal: React.FC = () => {
 
             {/* Quantity Selector & Action Buttons */}
             <div className="pt-4 border-t border-slate-200 space-y-2.5">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-xs font-bold text-slate-700">Quantity:</span>
-                <div className="flex items-center border border-slate-300 rounded-xl overflow-hidden bg-slate-50">
+              {selectedProduct.isRegistrationPackage ? (
+                <div className="space-y-3 pt-2">
+                  <div className="bg-amber-50 border border-amber-300/80 rounded-2xl p-3.5 text-xs text-amber-950 flex items-start gap-2.5 shadow-xs">
+                    <Award className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="block font-bold text-amber-900">Official Membership Registration (On Request)</strong>
+                      <span className="text-amber-800 leading-snug block mt-0.5">
+                        Registration packages are processed on request. Clicking below allows you to enter your name and details, and sends your package application directly to Ivy Imiavan's WhatsApp DM.
+                      </span>
+                    </div>
+                  </div>
+
                   <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-2 hover:bg-slate-200 text-slate-700 transition-colors"
+                    type="button"
+                    onClick={() => {
+                      const pkg = selectedProduct;
+                      setSelectedProduct(null);
+                      setRequestingPackage(pkg);
+                    }}
+                    className="w-full py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-black text-xs sm:text-sm rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all transform active:scale-98"
                   >
-                    <Minus className="w-3.5 h-3.5" />
-                  </button>
-                  <span className="px-4 text-xs font-bold text-slate-800">{quantity}</span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="p-2 hover:bg-slate-200 text-slate-700 transition-colors"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
+                    <MessageCircle className="w-4 h-4 fill-white stroke-none" />
+                    <span>Request Registration via Vendor WhatsApp</span>
                   </button>
                 </div>
-                <span className="text-xs text-slate-500">
-                  Total: <strong className="text-slate-800">₦{(selectedProduct.price * quantity).toLocaleString()}</strong>
-                </span>
-              </div>
+              ) : (
+                <>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xs font-bold text-slate-700">Quantity:</span>
+                    <div className="flex items-center border border-slate-300 rounded-xl overflow-hidden bg-slate-50">
+                      <button
+                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                        className="p-2 hover:bg-slate-200 text-slate-700 transition-colors"
+                      >
+                        <Minus className="w-3.5 h-3.5" />
+                      </button>
+                      <span className="px-4 text-xs font-bold text-slate-800">{quantity}</span>
+                      <button
+                        onClick={() => setQuantity(quantity + 1)}
+                        className="p-2 hover:bg-slate-200 text-slate-700 transition-colors"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                    <span className="text-xs text-slate-500">
+                      Total: <strong className="text-slate-800">₦{(selectedProduct.price * quantity).toLocaleString()}</strong>
+                    </span>
+                  </div>
 
-              {/* Main Store Actions */}
-              <div className="grid grid-cols-2 gap-2.5">
-                <button
-                  onClick={handleAddToCart}
-                  className="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors"
-                >
-                  <ShoppingCart className="w-4 h-4 text-emerald-700" />
-                  <span>Add to Cart</span>
-                </button>
-                <button
-                  onClick={handleBuyNow}
-                  className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-colors"
-                >
-                  Proceed to Pay
-                </button>
-              </div>
+                  {/* Main Store Actions */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <button
+                      onClick={handleAddToCart}
+                      className="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors"
+                    >
+                      <ShoppingCart className="w-4 h-4 text-emerald-700" />
+                      <span>Add to Cart</span>
+                    </button>
+                    <button
+                      onClick={handleBuyNow}
+                      className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-colors"
+                    >
+                      Proceed to Pay
+                    </button>
+                  </div>
 
-              {/* Direct WhatsApp Contact Button */}
-              <button
-                type="button"
-                onClick={handleChatWithVendor}
-                className="w-full py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all"
-              >
-                <MessageCircle className="w-4 h-4 fill-white stroke-none" />
-                <span>Contact Vendor on WhatsApp about this Product</span>
-              </button>
+                  {/* Direct WhatsApp Contact Button */}
+                  <button
+                    type="button"
+                    onClick={handleChatWithVendor}
+                    className="w-full py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-white stroke-none" />
+                    <span>Contact Vendor on WhatsApp about this Product</span>
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

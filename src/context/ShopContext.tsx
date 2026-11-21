@@ -19,6 +19,9 @@ interface ShopContextType {
   selectedProduct: Product | null;
   setSelectedProduct: (product: Product | null) => void;
   
+  requestingPackage: Product | null;
+  setRequestingPackage: (pkg: Product | null) => void;
+  
   isCheckoutOpen: boolean;
   setIsCheckoutOpen: (open: boolean) => void;
   
@@ -87,6 +90,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // UI Modals & Navigation state
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [requestingPackage, setRequestingPackage] = useState<Product | null>(null);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [activeOrder, setActiveOrder] = useState<Order | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -185,6 +189,8 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsCartOpen,
         selectedProduct,
         setSelectedProduct,
+        requestingPackage,
+        setRequestingPackage,
         isCheckoutOpen,
         setIsCheckoutOpen,
         activeOrder,

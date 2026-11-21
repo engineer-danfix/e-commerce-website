@@ -34,8 +34,14 @@ export const PromoHero: React.FC = () => {
             
             <div className="flex flex-wrap items-center gap-2">
               <button
-                onClick={() => setSelectedCategory('Combos & Value Packs')}
+                onClick={() => setSelectedCategory('Registration Packages')}
                 className="px-4 py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs rounded-xl shadow transition-all transform active:scale-95"
+              >
+                ⭐ Membership Packages (On Request)
+              </button>
+              <button
+                onClick={() => setSelectedCategory('Combos & Value Packs')}
+                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition-all"
               >
                 Triangle Life-Saver Package
               </button>
@@ -47,15 +53,9 @@ export const PromoHero: React.FC = () => {
               </button>
               <button
                 onClick={() => setSelectedCategory('Stem Cell Therapy')}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition-all"
-              >
-                SunRise StemCell
-              </button>
-              <button
-                onClick={() => setSelectedCategory("Men's Vitality")}
                 className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs rounded-xl backdrop-blur-sm transition-all"
               >
-                AlphaMax & AliPrime
+                SunRise StemCell
               </button>
             </div>
           </div>

@@ -22,10 +22,19 @@ export interface Product {
   dosageForm?: string; // e.g. "Sublingual Powder", "Capsules", "Herbal Coffee", "Combo Pack"
   expiryDate?: string;
   nafdaqNo?: string;
+  isRegistrationPackage?: boolean;
+  packageTier?: 'Consultant' | 'Leader' | 'Builder' | 'Pioneer' | string;
+  packagePoints?: {
+    pairingValue?: number;
+    sponsorValue?: number;
+    productCount?: number;
+    usdPrice?: number;
+  };
 }
 
 export type MedicalCategory = 
   | 'All'
+  | 'Registration Packages'
   | 'Stem Cell Therapy'
   | "Men's Vitality"
   | "Women's Wellness"

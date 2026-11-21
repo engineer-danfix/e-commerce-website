@@ -13,11 +13,13 @@ import {
   PackageCheck,
   Zap,
   Smile,
-  HeartPulse
+  HeartPulse,
+  Award
 } from 'lucide-react';
 
 const CATEGORY_ICONS: Record<MedicalCategory, React.ReactNode> = {
   'All': <Layers className="w-4 h-4" />,
+  'Registration Packages': <Award className="w-4 h-4 text-amber-500" />,
   'Stem Cell Therapy': <Sparkles className="w-4 h-4 text-emerald-500" />,
   "Men's Vitality": <Flame className="w-4 h-4 text-rose-500" />,
   "Women's Wellness": <Heart className="w-4 h-4 text-pink-500" />,

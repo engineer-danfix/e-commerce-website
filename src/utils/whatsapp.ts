@@ -137,3 +137,51 @@ export function generateTelegramLink(order: Order, vendorTelegram: string): stri
   const message = `Hello Ivy, I am placing an order on YES Global (#${order.orderReference}) for: ${itemsText}. Total: ₦${order.total.toLocaleString()} to Zenith Bank (Osemwinvie Imiavan - 2177625439). Customer: ${order.customer.fullName} (${order.customer.phone}). Delivery to ${order.customer.deliveryAddress}, ${order.customer.city}.`;
   return `https://t.me/+${cleanPhone}?text=${encodeURIComponent(message)}`;
 }
+
+/**
+ * Formats WhatsApp message for requesting an official YES Global Membership / Registration Package
+ */
+export function generateRegistrationPackageMessage(
+  pkg: Product,
+  customerInfo: { fullName: string; phone: string; location: string; notes?: string },
+  vendorWhatsApp: string
+): string {
+  const cleanPhone = vendorWhatsApp.replace(/[^0-9]/g, '');
+
+  const text = `*🌟 YES GLOBAL OFFICIAL MEMBERSHIP & REGISTRATION REQUEST 🌟*
+
+Hello Ivy Imiavan (YES Global Wellness Hub),
+I would like to apply and register as an official YES Global member with the package below:
+
+-------------------------------------
+*📦 PACKAGE DETAILS (ON REQUEST):*
+• *Package:* *${pkg.name}*
+• *Official Price:* ₦${pkg.price.toLocaleString()} ${pkg.packagePoints?.usdPrice ? `($${pkg.packagePoints.usdPrice})` : ''}
+• *Product Quantity:* ${pkg.dosageForm || 'Official Member Pack'}
+${pkg.packagePoints?.pairingValue ? `• *Pairing Value:* ${pkg.packagePoints.pairingValue} PV\n• *Sponsor Value:* ${pkg.packagePoints.sponsorValue} PV\n` : ''}
+-------------------------------------
+*👤 MY REGISTRATION DETAILS:*
+• *Full Name:* ${customerInfo.fullName}
+• *Phone / WhatsApp:* ${customerInfo.phone}
+• *City / State:* ${customerInfo.location}
+${customerInfo.notes ? `• *Preferred Products / Notes:* ${customerInfo.notes}\n` : ''}
+-------------------------------------
+*🏦 ZENITH BANK SETTLEMENT ACCOUNT:*
+• *Bank:* Zenith Bank PLC
+• *Account Number:* 2177625439
+• *Account Name:* Osemwinvie Imiavan
+
+_Hello Ivy, please confirm my registration request, guide me through membership enrollment, and arrange my package delivery!_`;
+
+  return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
+}
+
+export function generateRegistrationTelegramLink(
+  pkg: Product,
+  customerInfo: { fullName: string; phone: string; location: string; notes?: string },
+  vendorTelegram: string
+): string {
+  const cleanPhone = vendorTelegram.replace(/[^0-9]/g, '');
+  const message = `Hello Ivy, I want to apply for the YES Global Membership Package: ${pkg.name} (₦${pkg.price.toLocaleString()}). My details: Name: ${customerInfo.fullName}, Phone/WhatsApp: ${customerInfo.phone}, Location: ${customerInfo.location}. Notes: ${customerInfo.notes || 'None'}. Please guide me on payment to Zenith Bank (2177625439) and registration.`;
+  return `https://t.me/+${cleanPhone}?text=${encodeURIComponent(message)}`;
+}

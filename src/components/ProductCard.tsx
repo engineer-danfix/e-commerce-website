@@ -6,7 +6,9 @@ import {
   Check, 
   AlertTriangle, 
   ShieldCheck, 
-  Eye 
+  Eye,
+  MessageCircle,
+  Award
 } from 'lucide-react';
 import { Product } from '../types';
 import { useShop } from '../context/ShopContext';
@@ -16,13 +18,17 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { addToCart, setSelectedProduct, cart } = useShop();
+  const { addToCart, setSelectedProduct, cart, setRequestingPackage } = useShop();
   const [justAdded, setJustAdded] = React.useState(false);
 
   const cartItem = cart.find(item => item.product.id === product.id);
 
   const handleAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (product.isRegistrationPackage) {
+      setRequestingPackage(product);
+      return;
+    }
     addToCart(product, 1);
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 1200);
@@ -43,7 +49,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         />
 
         {/* Discount / Promo Badge */}
-        {product.originalPrice > product.price ? (
+        {product.isRegistrationPackage ? (
+          <span className="absolute top-2.5 left-2.5 bg-gradient-to-r from-emerald-800 to-teal-900 text-white text-[10px] font-black px-2 py-0.5 rounded-md shadow-sm flex items-center gap-1 border border-emerald-500/40">
+            <Award className="w-3 h-3 text-amber-300" />
+            MEMBERSHIP • ON REQUEST
+          </span>
+        ) : product.originalPrice > product.price ? (
           <span className="absolute top-2.5 left-2.5 bg-gradient-to-r from-rose-600 to-amber-600 text-white text-[10px] font-black px-2 py-0.5 rounded-md shadow-sm">
             PROMO • SAVE ₦{(product.originalPrice - product.price).toLocaleString()}
           </span>
@@ -118,33 +129,44 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             )}
           </div>
 
-          <button
-            onClick={handleAdd}
-            className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm ${
-              justAdded
-                ? 'bg-emerald-600 text-white'
-                : cartItem
-                ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100'
-                : 'bg-jumia-orange hover:bg-jumia-darkOrange text-white active:scale-95'
-            }`}
-          >
-            {justAdded ? (
-              <>
-                <Check className="w-3.5 h-3.5 stroke-[3]" />
-                <span>Added</span>
-              </>
-            ) : cartItem ? (
-              <>
-                <ShoppingCart className="w-3.5 h-3.5" />
-                <span>({cartItem.quantity}) Add</span>
-              </>
-            ) : (
-              <>
-                <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-                <span>Add</span>
-              </>
-            )}
-          </button>
+          {product.isRegistrationPackage ? (
+            <button
+              onClick={handleAdd}
+              className="px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm bg-[#25D366] hover:bg-[#20ba59] text-white active:scale-95"
+              title="Request membership package via WhatsApp"
+            >
+              <MessageCircle className="w-3.5 h-3.5 fill-white stroke-none" />
+              <span>Request</span>
+            </button>
+          ) : (
+            <button
+              onClick={handleAdd}
+              className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm ${
+                justAdded
+                  ? 'bg-emerald-600 text-white'
+                  : cartItem
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100'
+                  : 'bg-jumia-orange hover:bg-jumia-darkOrange text-white active:scale-95'
+              }`}
+            >
+              {justAdded ? (
+                <>
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <span>Added</span>
+                </>
+              ) : cartItem ? (
+                <>
+                  <ShoppingCart className="w-3.5 h-3.5" />
+                  <span>({cartItem.quantity}) Add</span>
+                </>
+              ) : (
+                <>
+                  <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+                  <span>Add</span>
+                </>
+              )}
+            </button>
+          )}
         </div>
       </div>
     </div>
