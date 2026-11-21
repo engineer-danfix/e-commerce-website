@@ -156,7 +156,7 @@ I would like to apply and register as an official YES Global member with the pac
 -------------------------------------
 *📦 PACKAGE DETAILS (ON REQUEST):*
 • *Package:* *${pkg.name}*
-• *Official Price:* ₦${pkg.price.toLocaleString()} ${pkg.packagePoints?.usdPrice ? `($${pkg.packagePoints.usdPrice})` : ''}
+• *Official Price:* ₦${pkg.price.toLocaleString()}
 • *Product Quantity:* ${pkg.dosageForm || 'Official Member Pack'}
 ${pkg.packagePoints?.pairingValue ? `• *Pairing Value:* ${pkg.packagePoints.pairingValue} PV\n• *Sponsor Value:* ${pkg.packagePoints.sponsorValue} PV\n` : ''}
 -------------------------------------

@@ -28,7 +28,6 @@ export interface Product {
     pairingValue?: number;
     sponsorValue?: number;
     productCount?: number;
-    usdPrice?: number;
   };
 }
 

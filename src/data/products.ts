@@ -594,7 +594,7 @@ export const MEDICAL_PRODUCTS: Product[] = [
     nafdaqNo: 'Wholesale Member Certified',
     isRegistrationPackage: true,
     packageTier: 'Consultant',
-    packagePoints: { pairingValue: 30, sponsorValue: 30, productCount: 2, usdPrice: 42 }
+    packagePoints: { pairingValue: 30, sponsorValue: 30, productCount: 2 }
   },
   {
     id: 'yes-23',
@@ -619,7 +619,7 @@ export const MEDICAL_PRODUCTS: Product[] = [
     nafdaqNo: 'Wholesale Leader Certified',
     isRegistrationPackage: true,
     packageTier: 'Leader',
-    packagePoints: { pairingValue: 90, sponsorValue: 90, productCount: 6, usdPrice: 126 }
+    packagePoints: { pairingValue: 90, sponsorValue: 90, productCount: 6 }
   },
   {
     id: 'yes-24',
@@ -644,7 +644,7 @@ export const MEDICAL_PRODUCTS: Product[] = [
     nafdaqNo: 'Master Distributor Certification',
     isRegistrationPackage: true,
     packageTier: 'Builder',
-    packagePoints: { pairingValue: 360, sponsorValue: 360, productCount: 24, usdPrice: 504 }
+    packagePoints: { pairingValue: 360, sponsorValue: 360, productCount: 24 }
   },
   {
     id: 'yes-25',
@@ -669,7 +669,7 @@ export const MEDICAL_PRODUCTS: Product[] = [
     nafdaqNo: 'Pioneer Executive Certification',
     isRegistrationPackage: true,
     packageTier: 'Pioneer',
-    packagePoints: { pairingValue: 780, sponsorValue: 780, productCount: 52, usdPrice: 1092 }
+    packagePoints: { pairingValue: 780, sponsorValue: 780, productCount: 52 }
   }
 ];
 
