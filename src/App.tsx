@@ -54,7 +54,7 @@ export function AppContent() {
   }, [products, selectedCategory, searchQuery, onlyRx, sortBy]);
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col text-slate-800">
+    <div className="min-h-screen bg-white flex flex-col text-slate-800">
       {/* Top Header */}
       <Header />
 

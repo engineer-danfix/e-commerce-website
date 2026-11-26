@@ -11,8 +11,10 @@ export const MEDICAL_PRODUCTS: Product[] = [
     discountPercent: 9,
     rating: 4.9,
     reviewCount: 248,
-    image: '/yes-global/yes-img-45.jpeg',
+    image: '/yes-global/sunrise-cover-box.jpeg',
     additionalImages: [
+      '/yes-global/sunrise-cover-spoon.jpeg',
+      '/yes-global/yes-img-45.jpeg',
       '/yes-global/yes-img-21.jpeg',
       '/yes-global/yes-img-22.jpeg',
       '/yes-global/yes-img-23.jpeg',

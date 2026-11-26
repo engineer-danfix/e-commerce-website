@@ -40,11 +40,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       className="group relative bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all flex flex-col justify-between cursor-pointer"
     >
       {/* Top Badges */}
-      <div className="relative pt-[75%] bg-slate-100 overflow-hidden">
+      <div className="relative pt-[75%] bg-white overflow-hidden border-b border-slate-100">
         <img
           src={product.image}
           alt={product.name}
-          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+          className="absolute inset-0 w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
 
